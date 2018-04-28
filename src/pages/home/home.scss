@@ -1,4 +1,9 @@
 page-home {
+    #my-map {
+        height: 90%;
+        margin-top: 0%;
+        
+    }
 .topRigth{
         margin-left: auto;
         margin-right: 5%;
@@ -14,7 +19,7 @@ page-home {
     
     margin-left: 0%;
     margin-right: auto;
-    margin-top: 150%;
+    margin-top: -50%;
     height: 65px;
 }
 .justbottom{
@@ -24,14 +29,15 @@ text-align: center;
 .bottomRigth{
     height: 67px;
     width: 60;
-    margin-left: 65%;
+    margin-left: 50%;
     margin-right: auto;
-    margin-top: -28%;
+    margin-top: -55%;
    
 }
 .fuenteletra {
   font: oblique bold 120% cursive;
   color: black;
+  font-size: 100%;
 }
 
 }

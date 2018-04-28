@@ -1,5 +1,8 @@
 <ion-header>
-  
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    </style>
 </ion-header>
 
 <ion-content padding>
@@ -9,7 +12,7 @@
     <button ion-fab mini><ion-icon name="ios-arrow-dropdown"></ion-icon></button>
   
     <ion-fab-list>
-  
+
       <button ion-fab><ion-icon name="ios-map"></ion-icon></button>
       <button ion-fab (click)="botonPerfil();"><ion-icon name="md-person"></ion-icon></button>
       <button ion-fab (click)="botonLogOut();"><ion-icon name="md-exit"></ion-icon></button>
@@ -20,9 +23,11 @@
 
   <img src="../../assets/imgs/LiftLogo.png" width="50" height="50" class="topLeft">
 
+  <div #map id="my-map" >
+  </div>
   <button ion-button class="bottomLeft" color="inv" (click) = "botonRide();" clear>
     <div>
-        <img src="../../assets/imgs/conductorlogo.png" width="90" height="50" (click) = "botonLift();">
+        <img src="../../assets/imgs/conductorlogo.png" width="70" height="50" (click) = "botonLift();">
       <div class="justbottom">
         <h6 class="fuenteletra">Lift Someone</h6>
       </div>
@@ -31,7 +36,7 @@
 
   <button ion-button color="inv" class="bottomRigth" (click)="botonLift();" clear>
     <div>
-         <img src="../../assets/imgs/passenger.png" width="50" height="30">
+         <img src="../../assets/imgs/passenger.png" width="40" height="30">
          <div class="justbottom">
            <h6 class="fuenteletra">Get Lift</h6>
         </div>
@@ -39,4 +44,5 @@
  
   </button>
 
+ 
 </ion-content>
