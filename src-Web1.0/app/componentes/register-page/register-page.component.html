@@ -1,0 +1,61 @@
+<div class="row mt-3">
+    <div class="col-md-6 mx-auto text-center">
+      <div class="card">
+        <div class="card-body">
+            <h1 class="text-center">REGISTRO</h1>
+          <form (submit)="onSubmitAddUser()">
+            
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="nombre" name="nombre" id="nombre" [(ngModel)]="nombre" class="form-control">             
+            </div>
+            <div class="form-group">
+              <label for="apellido">Apellido</label>
+              <input type="apellido" name="apellido" id="apellido" [(ngModel)]="apellido" class="form-control">             
+            </div>
+            <div class="form-group">
+              <label for="codigo">Código Universitario</label>
+              <input type="codigo" name="codigo" id="codigo" [(ngModel)]="codigo" class="form-control">             
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" [(ngModel)]="email" class="form-control">             
+            </div>
+            <div class="form-group">
+              <label for="celular">Celular</label>
+              <input type="celular" name="celular" id="celular" [(ngModel)]="celular" class="form-control">             
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="username" name="username" id="username" [(ngModel)]="username" class="form-control">             
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+             <input type="password" name="password" id="password" [(ngModel)]="password" class="form-control">
+            </div>
+            <input type="submit" value="ENVIAR" class="btn btn-primary btn-block btn-lg">
+
+            <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+
+             <script>
+
+              // Initialize Firebase
+
+              var config = {
+              apiKey: "AIzaSyCd73spCngujttVcS9Dga6akanUBHe89vo",
+              authDomain: "liftapp-f892f.firebaseapp.com",
+              databaseURL: "https://liftapp-f892f.firebaseio.com",
+              projectId: "liftapp-f892f",
+              storageBucket: "liftapp-f892f.appspot.com",
+              messagingSenderId: "870835801913"
+              };
+
+              firebase.initializeApp(config);
+
+            </script>
+          </form>
+        </div>
+      </div> 
+    </div> 
+  </div>
+ 
