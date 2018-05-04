@@ -27,11 +27,8 @@ export class HomePage {
 
 
   constructor(public navCtrl: NavController, private geolocation: Geolocation) {
-  //  this.directionsService = new google.maps.DirectionsService();
-  //  this.directionsDisplay = new google.maps.DirectionsRenderer();
-  //  this.bounds = new google.maps.LatLngBounds();
-  //  this.directionsDisplay.setMap(this.map);
-
+  
+ 
   }
   ionViewDidLoad(){
     FirebasedatabaseLift.getInstance();
@@ -53,7 +50,13 @@ export class HomePage {
       center: location,
       zoom: 18,
       streetViewControl: false,
-      mapTypeId: 'roadmap'
+      mapTypeId: 'roadmap',
+      zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+      
     };
 
     //se ponen las opciones

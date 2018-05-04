@@ -26,6 +26,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
+  
   botonlogin(){
     //console.log(this.email + ' ' + this.pass);
     //AIzaSyCIX2OMQdLI_KT-URPkXufyulPywuTniMk
@@ -33,13 +34,12 @@ export class LoginPage {
     //console.log(this.auth.app.auth().currentUser.uid);
     this.navCtrl.push(HomePage);
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-    //AngularFireModule.initializeApp(firebasConfig);
       FirebasedatabaseLift.getInstance();
       firebase.auth().signInWithEmailAndPassword('asd@asd.com', 'pass123');
   
   }
 
 }
-d

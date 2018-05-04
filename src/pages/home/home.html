@@ -1,12 +1,47 @@
 <ion-header>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
+    <style type="text/css"> 
+#capa1{ padding: true;   height: 100%; z-index: inherit;}
+#capa2{ height: 50; width: 50; margin-left: 80%; margin-right: 5%; margin-top: -175%; z-index: inherit;
+  position: absolute;}
+#capa3{ 
+  height: 75px; width: 100px; margin-left: 10%; margin-right: 80%; margin-top: -30%; z-index: inherit;
+  position: absolute;
+}
+#capa4{
+  height: 80px; width: 70px; margin-left: 70%; margin-right: 10%; margin-top: -28%; z-index: inherit;
+  position: absolute;
+  
+}
+
     </style>
 </ion-header>
 
-<ion-content padding>
+<ion-content no-bounce>
 
+   
+  <div #map id="capa1" padding > </div>
+
+  <img src="../../assets/imgs/LiftLogo.png" id="capa2" height="50" width="50">
+
+  <button ion-button id="capa3" color="inv" (click) = "botonRide();" clear>
+      <div>
+          <img src="../../assets/imgs/conductorlogo.png" width="70" height="50" (click) = "botonLift();">
+        <div class="justbottom">
+          <h6 class="fuenteletra">Lift Someone</h6>
+        </div>
+    </div>
+    </button>
+  
+  <button ion-button color="inv" id="capa4" (click)="botonLift();" clear>
+      <div>
+           <img src="../../assets/imgs/passenger.png" width="40" height="30" >
+           <div class="justbottom">
+             <h6 class="fuenteletra">Get Lift</h6>
+          </div>
+    </div>
+   
+    </button>
+  
   <ion-fab class="topRigth">
   
     <button ion-fab mini><ion-icon name="ios-arrow-dropdown"></ion-icon></button>
@@ -20,29 +55,9 @@
     </ion-fab-list>
   
   </ion-fab>
+  
 
-  <img src="../../assets/imgs/LiftLogo.png" width="50" height="50" class="topLeft">
 
-  <div #map id="my-map" >
-  </div>
-  <button ion-button class="bottomLeft" color="inv" (click) = "botonRide();" clear>
-    <div>
-        <img src="../../assets/imgs/conductorlogo.png" width="70" height="50" (click) = "botonLift();">
-      <div class="justbottom">
-        <h6 class="fuenteletra">Lift Someone</h6>
-      </div>
-  </div>
-  </button>
-
-  <button ion-button color="inv" class="bottomRigth" (click)="botonLift();" clear>
-    <div>
-         <img src="../../assets/imgs/passenger.png" width="40" height="30">
-         <div class="justbottom">
-           <h6 class="fuenteletra">Get Lift</h6>
-        </div>
-  </div>
  
-  </button>
-
  
 </ion-content>
