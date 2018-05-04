@@ -1,23 +1,8 @@
 Bitacora de Javier Soruco proyecto lift(nombre sujeto a cambios)
-lunes 23 de abril
-Luego de la presentacion de la pagina web de apuestas dirigidas al mundial, se decidio elejir otro tipo de proyecto para este sprint,
-este dia fue exclusivo para buscar algun tipo de inovacion, se consideraron primero cambios que se podrian realizar a la pagina web del mundial
-sin embargo el equipo decidio optar por un nuevo proyecto.
-martes 24 de abril
-En la mañana en clase se decidio cambiar el proyecto a una app movil de aventones a la universidad, esta necesita una pagina administrativa
-a parte de la aplicacion, por eso nos dividimos en dos scrum team, estoy en el scrum team de aplicacion, se decidio trabajar con ionic.
-En la tarde se reviso la estabilidad de las versiones de coordova e ionic y se decidio que no habia mayor problemas en usar las ultimas.
-miercoles 25 de abril
-Al intentar instalar coordova e ionic, se dieron problemas, por eso y otros motivos se decidio restaurar la computadoras de fabrica
-luego de hacer un backup, en esto se fue el dia.
-jueves 26 de abril
-Las tareas fueron divididas, pedi todo lo relacionado a front end, tambien avise que aprendan un poco de html5 para que el equipo pueda manipular
-y entender el codigo sin amyores percanses, busque un logo para la aplcacion (una volskwagen) y se hico el interfaz de inicio de sesion,
-ademas se decidio que el registro solo se haga mediante la pagina web administrativa por razones de seguridad.
-viernes 27 e abril
-Este dia se realizo el resto del front end de mi parte, la pagina de inicio donde se supone que estara el mapa, y la pagina de perfil de usuario;
-en la pagina de inicio se eligio imagenes para poner a los botones, una de ella tuvo que ser editada en paint.net para quitar el fondo blanco y hacerla
-transparente, se tuvo problemas para poner letras (tambien en el boton) justo debajo de la imagen, pero para esto se creo una clase en el 
-scss y se le asigno margenes apropiados (archivo scss  de home) tambien se puso un estilo de letra y size,el mismo estilo de letra se uso
-para el perfil ademas de agregar una foto por defecto de un stormtrooper hasta que en versiones posteriores se permita agregar foto,
-por ultimoa agregue un mapa al inicio, primero se planeaba usar ionic maps, pero se decidio que era mas facil la googlemaps api.
+jueves 3 de mayo
+se implemento un marcador movible para indicar la posicion de donde el pasajero se encuentra, necesario en caso d eestar en un edificio en donde el gps suele 
+fallar, sin mayores problemas, exepto que no se puede obtener de manera numerica la latitud y longitud del marcador, sin embargo, se obtiene 
+una variable de localizacion la cual puede interactuar con el mapa.
+viernes 4 de mayo
+se puso el mapa a full screen, se presentaron problemas con los botones para ponerlos sobre el mapa, se soluciono creando capas en el style,
+ademas se desactivaron los controles por defecto del google maps api, por motivos esteticos.
