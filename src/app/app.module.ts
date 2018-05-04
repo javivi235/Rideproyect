@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {AngularFireAuthModule} from 'angularfire2/auth';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -31,9 +33,7 @@ export const firebasConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebasConfig),
-    AngularFirestoreModule,
-    AngularFireAuthModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,6 +45,7 @@ export const firebasConfig = {
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -2,6 +2,9 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import{ProfilePage} from '../../pages/profile/profile';
+import { Geolocation } from '@ionic-native/geolocation';
+import {FirebasedatabaseLift} from '../../components/components-firebase/components-firebase'
+import * as firebase from 'firebase';
 
 declare var google: any;
 
@@ -11,17 +14,40 @@ declare var google: any;
 })
 export class HomePage {
 
-  @ViewChild('map') mapRef: ElementRef;
+//Mapa obtenido del html
 
-  constructor(public navCtrl: NavController) {
+  @ViewChild('map') mapRef: ElementRef;
+  map : any;
+  marker: any;
+ // directionsService: any = null;
+ // directionsDisplay: any = null;
+ // bounds: any = null;
+ // myLatLng: any;
+ // waypoints: any[];
+
+
+  constructor(public navCtrl: NavController, private geolocation: Geolocation) {
+  //  this.directionsService = new google.maps.DirectionsService();
+  //  this.directionsDisplay = new google.maps.DirectionsRenderer();
+  //  this.bounds = new google.maps.LatLngBounds();
+  //  this.directionsDisplay.setMap(this.map);
 
   }
   ionViewDidLoad(){
-  this.DisplayMap();  
-  
+    FirebasedatabaseLift.getInstance();
+    this.DisplayMap();    
+
 }
   DisplayMap() {
-    let location = new google.maps.LatLng(-17.378276, -66.149843);
+
+    //se crea una localizacion con lalitud y longitud
+    this.geolocation.getCurrentPosition().then((resp) => {
+      let location = new google.maps.LatLng( resp.coords.latitude, 
+      resp.coords.longitude);
+    
+    //se declaran opciones en las que se establece el centro en la variable 
+    //localizacion, se da un zoom, se desavilita en street view
+    //y se elije el tipo de mapa roadmap.
 
     const options = {
       center: location,
@@ -30,28 +56,44 @@ export class HomePage {
       mapTypeId: 'roadmap'
     };
 
-    const map = new google.maps.Map(this.mapRef.nativeElement, options);
-   
+    //se ponen las opciones
 
-  }
+    const map = new google.maps.Map(this.mapRef.nativeElement, options);
+   this.map = map;
+    this.marker = this.addMarker(location, map);
+    console.log(this.marker.getPosition());
+    
+  });
+  
+}
 
   addMarker(position, map){
+    
+    console.log('Agregando marcador');
+    
+      this.marker = new google.maps.Marker({
+     
+      position: position,
+      map: map,
+      draggable: true,
+      label: 'you'
+      
 
-    return new google.maps.Marker({
-      position,
-      map
-    });
+    }); 
+      return this.marker;
 
   }
 
   botonRide(){
-
+    //console.log(this.marker.getCurrentPosition);
     console.log("Dispuesto a llevar a alguien");
 
   }
   botonLift(){
 
+    this.map.setCenter(this.marker.getPosition());
     console.log("buscando aventon");
+    
   }
 
   botonLogOut(){

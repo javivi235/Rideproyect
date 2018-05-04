@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import {AngularFireAuth} from 'angularfire2/auth';
+import * as firebase from 'firebase';
+import {FirebasedatabaseLift, firebasConfig} from '../../components/components-firebase/components-firebase';
+import { AngularFireModule } from 'angularfire2';
 
 /**
  * Generated class for the LoginPage page.
@@ -21,7 +24,7 @@ export class LoginPage {
   @Input('pass') pass: string;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
   botonlogin(){
     //console.log(this.email + ' ' + this.pass);
@@ -32,6 +35,11 @@ export class LoginPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    //AngularFireModule.initializeApp(firebasConfig);
+      FirebasedatabaseLift.getInstance();
+      firebase.auth().signInWithEmailAndPassword('asd@asd.com', 'pass123');
+  
   }
 
 }
+d
