@@ -6,3 +6,9 @@ una variable de localizacion la cual puede interactuar con el mapa.
 viernes 4 de mayo
 se puso el mapa a full screen, se presentaron problemas con los botones para ponerlos sobre el mapa, se soluciono creando capas en el style,
 ademas se desactivaron los controles por defecto del google maps api, por motivos esteticos.
+sabado 5 de mayo
+Se cambio el interfaz de home de la siguiente forma:
+se agrego un boton cancelar, tal que aparesca cuando presionas el boton de solicitar aventon, (los dos botones iniciales desaparecen dejando solo al candelar)
+y si se cancela, este desaparece y reapareen los dos botones; cuando presionas el boton de aventon se guarda el aventon con tus datos y tu ubicacion
+como matchpoint, pues ahi es donde debe ir el conductor, si se cancela el viaje esto mismo se borra de la base de datos, cuando se ponen funciones
+a los botones en el html suele presentarse el problema en el que no encuentra el metodo, solo encontre solucion rehaciendo el metodo.
