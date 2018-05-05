@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import{ProfilePage} from '../../pages/profile/profile';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -17,20 +17,21 @@ export class HomePage {
 //Mapa obtenido del html
 
   @ViewChild('map') mapRef: ElementRef;
+  //el mapa y un marcador
   map : any;
   marker: any;
- // directionsService: any = null;
- // directionsDisplay: any = null;
- // bounds: any = null;
- // myLatLng: any;
- // waypoints: any[];
+  //el nickname de usuario y la variable booleana que determina los botones que deben aparecer en pantalla
+  nickname = "";
+  disabledtrip = false;
+  tripcode = '';
 
-
-  constructor(public navCtrl: NavController, private geolocation: Geolocation) {
+  constructor(public navCtrl: NavController,public navParams: NavParams, private geolocation: Geolocation) {
   
- 
+    this.nickname = this.navParams.get('nickname');
+    console.log(this.nickname);
   }
   ionViewDidLoad(){
+    //inicializando la base de datos
     FirebasedatabaseLift.getInstance();
     this.DisplayMap();    
 
@@ -95,8 +96,22 @@ export class HomePage {
   botonLift(){
 
     this.map.setCenter(this.marker.getPosition());
-    console.log("buscando aventon");
-    
+    console.log("buscando aventon: " + this.nickname);
+    //creando un viaje en la base de datos
+    firebase.database().ref('viaje en curso').child(this.nickname).set({
+      nickname: this.nickname,
+      nombre: 'javi',
+      telefono: '76199970',
+      conductor: '',
+      matchpoint: {
+        latitud: this.marker.getPosition().lat(),
+        longitud: this.marker.getPosition().lng()   
+      }
+    });
+    console.log('tripocode: ' + this.tripcode);
+
+    //cambiando el marcador a fijo 
+    this.marker.setDraggable(false);
   }
 
   botonLogOut(){
@@ -106,8 +121,13 @@ export class HomePage {
   }
   botonPerfil(){
 
-    this.navCtrl.push(ProfilePage);
+    this.navCtrl.push(ProfilePage, {nickname: this.nickname});
   
+  }
+  botonCancel(){
+    //eliminando el viaje de la base de datos
+    console.log('cancelando');
+    firebase.database().ref('viaje en curso').child(this.nickname).remove();
   }
 
 }

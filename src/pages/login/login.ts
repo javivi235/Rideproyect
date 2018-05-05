@@ -28,11 +28,13 @@ export class LoginPage {
   }
   
   botonlogin(){
+    const nickname = this.username;
     //console.log(this.email + ' ' + this.pass);
     //AIzaSyCIX2OMQdLI_KT-URPkXufyulPywuTniMk
     //this.auth.app.auth().signInWithEmailAndPassword(this.username, this.pass);
     //console.log(this.auth.app.auth().currentUser.uid);
-    this.navCtrl.push(HomePage);
+    //console.log(nickname + " us: " + this.username);
+    this.navCtrl.push(HomePage,{nickname: nickname});
   }
 
   ionViewDidLoad() {

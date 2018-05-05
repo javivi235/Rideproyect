@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
@@ -17,11 +18,20 @@ import { LoginPage } from '../login/login';
 })
 export class ProfilePage {
 
+  nickname: '';
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  this.nickname = this.navParams.get('nickname');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+  }
+
+  botonHome() {
+
+    this.navCtrl.push(HomePage,{nickname: this.nickname});
+
   }
 
   botonLogOut(){
@@ -29,10 +39,5 @@ export class ProfilePage {
     this.navCtrl.push(LoginPage);
   
   }
-  botonMapa(){
-
-    this.navCtrl.push(HomePage);
   
-  }
-
 }

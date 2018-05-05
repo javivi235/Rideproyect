@@ -12,6 +12,12 @@
   position: absolute;
   
 }
+#capa5{
+  height: 20px; width: 20px; margin-left: 50%; margin-right: 10%; margin-top: -18%; z-index: inherit;
+  position: absolute;
+  
+}
+
 
     </style>
 </ion-header>
@@ -23,7 +29,7 @@
 
   <img src="../../assets/imgs/LiftLogo.png" id="capa2" height="50" width="50">
 
-  <button ion-button id="capa3" color="inv" (click) = "botonRide();" clear>
+  <button ion-button id="capa3" [disabled]="disabledtrip" [hidden] = "disabledtrip" color="inv" (click) = "botonRide();" clear>
       <div>
           <img src="../../assets/imgs/conductorlogo.png" width="70" height="50" (click) = "botonLift();">
         <div class="justbottom">
@@ -32,7 +38,7 @@
     </div>
     </button>
   
-  <button ion-button color="inv" id="capa4" (click)="botonLift();" clear>
+  <button ion-button color="inv" id="capa4" [disabled]="disabledtrip" [hidden] = "disabledtrip"  (click)="botonLift();  disabledtrip =true;" clear>
       <div>
            <img src="../../assets/imgs/passenger.png" width="40" height="30" >
            <div class="justbottom">
@@ -41,7 +47,7 @@
     </div>
    
     </button>
-  
+    <button ion-button color="inv" id="capa5" [disabled]="!disabledtrip" [hidden] = "!disabledtrip" (click)="botonCancel();disabledtrip = false;"><ion-icon name="ios-close-circle-outline"></ion-icon></button>
   <ion-fab class="topRigth">
   
     <button ion-fab mini><ion-icon name="ios-arrow-dropdown"></ion-icon></button>
