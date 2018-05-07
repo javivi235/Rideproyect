@@ -5,6 +5,8 @@ import{ProfilePage} from '../../pages/profile/profile';
 import { Geolocation } from '@ionic-native/geolocation';
 import {FirebasedatabaseLift} from '../../components/components-firebase/components-firebase'
 import * as firebase from 'firebase';
+import { AlertController } from 'ionic-angular';
+
 
 declare var google: any;
 
@@ -25,7 +27,7 @@ export class HomePage {
   disabledtrip = false;
   tripcode = '';
 
-  constructor(public navCtrl: NavController,public navParams: NavParams, private geolocation: Geolocation) {
+  constructor(public navCtrl: NavController,public navParams: NavParams, private geolocation: Geolocation, public alertCtrl: AlertController) {
   
     this.nickname = this.navParams.get('nickname');
     console.log(this.nickname);
@@ -33,7 +35,8 @@ export class HomePage {
   ionViewDidLoad(){
     //inicializando la base de datos
     FirebasedatabaseLift.getInstance();
-    this.DisplayMap();    
+    this.DisplayMap();
+      
 
 }
   DisplayMap() {
@@ -116,8 +119,17 @@ export class HomePage {
 
   botonLogOut(){
 
+   firebase.auth().signOut().then((resp) => {
     this.navCtrl.push(LoginPage);
-  
+   }, (err) => {
+    let alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: 'ha ocurrido un error.',
+      buttons: ['OK']
+    });
+    alert.present();
+   });
+    
   }
   botonPerfil(){
 
@@ -126,8 +138,27 @@ export class HomePage {
   }
   botonCancel(){
     //eliminando el viaje de la base de datos
-    console.log('cancelando');
-    firebase.database().ref('viaje en curso').child(this.nickname).remove();
+    let confirm = this.alertCtrl.create({
+      title: 'Estas seguro?',
+      message: 'Deseas cancelar el viaje??',
+      buttons: [
+        {
+          text: 'Si',
+          handler: () => {
+          
+            firebase.database().ref('viaje en curso').child(this.nickname).remove();
+            this.disabledtrip = false;
+          }
+        },
+        {
+          text: 'No',
+          handler: () => {
+          
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

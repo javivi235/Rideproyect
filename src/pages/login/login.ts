@@ -1,11 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import {FirebasedatabaseLift, firebasConfig} from '../../components/components-firebase/components-firebase';
-import { AngularFireModule } from 'angularfire2';
-
+import { AlertController } from 'ionic-angular';
 /**
  * Generated class for the LoginPage page.
  *
@@ -24,24 +22,59 @@ export class LoginPage {
   @Input('pass') pass: string;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    FirebasedatabaseLift.getInstance();
+  
   }
   
   botonlogin(){
-    const nickname = this.username;
-    //console.log(this.email + ' ' + this.pass);
-    //AIzaSyCIX2OMQdLI_KT-URPkXufyulPywuTniMk
-    //this.auth.app.auth().signInWithEmailAndPassword(this.username, this.pass);
-    //console.log(this.auth.app.auth().currentUser.uid);
-    //console.log(nickname + " us: " + this.username);
-    this.navCtrl.push(HomePage,{nickname: nickname});
+    console.log('boton log in presionado');
+   const clave = this.pass;
+   const nickname = this.username;
+   const navct = this.navCtrl;
+   const alct = this.alertCtrl;
+    
+
+    firebase.database().ref('Usuarios').child(this.username).child('email').on('value', function(snapshot) {
+
+      if(snapshot.exportVal() === null) {
+        
+        let alert = alct.create({
+          title: 'Error',
+          subTitle: 'Usuario no encontrado',
+          buttons: ['OK']
+        });
+        alert.present();
+
+      } else{
+        firebase.auth().signInWithEmailAndPassword(snapshot.exportVal(), clave).then((resp) => {
+      
+          console.log('success');
+          navct.push(HomePage,{nickname: nickname});
+        
+        }, (err) => {
+          let alert = alct.create({
+            title: 'Error',
+            subTitle: 'Contraseña incorrecta',
+            buttons: ['OK']
+          });
+          alert.present();
+        });
+      }
+    });
+        
+      
+   
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
       FirebasedatabaseLift.getInstance();
-      firebase.auth().signInWithEmailAndPassword('asd@asd.com', 'pass123');
-  
+   // firebase.auth().signInWithEmailAndPassword('asd@asd.com', 'pass123').then((res => {
+   //   console.log('saddasdq');
+   // }));
+
   }
 
 }
