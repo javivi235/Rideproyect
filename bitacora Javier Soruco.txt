@@ -12,3 +12,6 @@ se agrego un boton cancelar, tal que aparesca cuando presionas el boton de solic
 y si se cancela, este desaparece y reapareen los dos botones; cuando presionas el boton de aventon se guarda el aventon con tus datos y tu ubicacion
 como matchpoint, pues ahi es donde debe ir el conductor, si se cancela el viaje esto mismo se borra de la base de datos, cuando se ponen funciones
 a los botones en el html suele presentarse el problema en el que no encuentra el metodo, solo encontre solucion rehaciendo el metodo.
+domingo 6 de mayo
+Se corrigio la parte de inicio de sesion la cual estaba incompleta, se implementaron cuadros de alerta en el proyecto y cuadros de confirmacion donde es necesario,
+se presento un problema que luego de cerrar secion la aplicacion no reaccionaba, la razon era por que no se modificaron apropiadamente las reglas de la base de datos.
