@@ -25,6 +25,7 @@ export class HomePage {
   //el mapa y un marcador
   map : any;
   marker: any;
+  pasajeros : any[];
   //el nickname de usuario y la variable booleana que determina los botones que deben aparecer en pantalla
   nickname = "";
   disabledtrip = false;
@@ -38,8 +39,7 @@ export class HomePage {
   ionViewDidLoad(){
     //inicializando la base de datos
     FirebasedatabaseLift.getInstance();
-    this.DisplayMap();
-      
+    this.DisplayMap();  
 
 }
   DisplayMap() {
@@ -73,6 +73,84 @@ export class HomePage {
     this.marker = this.addMarker(location, map);
     console.log(this.marker.getPosition());
     
+    var alertct1 = this.alertCtrl;
+    
+    firebase.database().ref('viaje en curso').on('value', function(snapshot) {
+     
+      snapshot.forEach(function(childSnapshot) {
+        const latlng = {lat: childSnapshot.child('matchpoint').child('latitud').exportVal(), lng: childSnapshot.child('matchpoint').child('longitud').exportVal()} 
+        var marcador = new google.maps.Marker({
+          position: latlng,
+          map: map,
+          draggable: false,
+          label: childSnapshot.key,
+        
+        });
+        var alertct2 = alertct1;
+        
+        marcador.addListener('click', function() {
+          
+          var alertct = alertct2; 
+          
+          let confirm = alertct.create({
+            title: 'Deseas dar un aventon?',
+            message: 'Quieres acercar a ' + childSnapshot.child('nickname').exportVal() + ' a la upb?',
+            buttons: [
+              {
+                text: 'Si',
+                handler: () => {
+                  let prompt = alertct.create({
+                    title: 'Datos de tu carro',
+                    inputs: [
+                      {
+                        name: 'marca',
+                        placeholder: 'marca'
+                      },
+                      {
+                        name: 'placa',
+                        placeholder: 'placa'
+                      },
+                      {
+                        name: 'color',
+                        placeholder: 'color'
+                      }
+                    ],
+                    buttons: [
+                      {
+                        text: 'Cancel',
+                        handler: data => {
+                          console.log('Cancel clicked');
+                        }
+                      },
+                      {
+                        text: 'Save',
+                        handler: data => {
+                          console.log('Saved clicked');
+                        }
+                      }
+                    ]
+                  });
+                  prompt.present();
+                  
+                }
+              },
+              {
+                text: 'No',
+                handler: () => {
+                
+                }
+              }
+            ]
+          });
+          confirm.present();      
+          
+        });
+        
+        return false;
+
+        });
+    });
+
   });
   
 }
@@ -96,75 +174,7 @@ export class HomePage {
 
   botonRide(){
     //console.log(this.marker.getCurrentPosition);
-    console.log("Dispuesto a llevar a alguien");
-    const alertct = this.alertCtrl;
-    let prompt = this.alertCtrl.create({
-      title: 'Datos del carro',
-      inputs: [
-        {
-          name: 'placa',
-          placeholder: 'placa'
-        },
-        {
-          name: 'marca',
-          placeholder: 'marca'
-        },
-        {
-          name: 'color',
-          placeholder: 'color'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            console.log('Saved clicked');
-           // const coche = new Coche(data.marca, data.color, data.placa);
-           var matchpoint: matchPoint[] =[];  
-           
-           firebase.database().ref('viaje en curso').once('value', function(snapshot) {
-            var solicitudes = alertct.create();
-            let c= 0;
-            snapshot.forEach(function(ChildSnapshot){
-              var geo = new google.maps.Geocoder;
-              const latlng = {lat: ChildSnapshot.child('matchpoint').child('latitud').exportVal(), lng: ChildSnapshot.child('matchpoint').child('longitud').exportVal()}
-  
-              geo.geocode({location: latlng}, function(results, status) {
-                c= c +1;
-                
-                if(status === 'OK'){
-                  console.log(results[0].formatted_address);
-                  solicitudes.addInput({
-                    type: 'radio',
-                    label: ChildSnapshot.key + '\n ubicacion: ' + results[0].formatted_address ,
-                    
-                                       
-                  });
-                  if(c === snapshot.numChildren()){
-                    solicitudes.addButton('cancelar');
-                    solicitudes.present();
-                  }
-                }
-              });  
-              
-                return false;
-              });
-           
-            
-          });
-            
-          }
-        }
-      ]
-    });
-    prompt.present();
-
+    
   }
   botonLift(){
 

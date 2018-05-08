@@ -22,3 +22,6 @@ como el metodo de lectura a tiempo real o el metodo geocodificacion de firebase 
 ppor eso la lista de solicitudes no es atiempo real si no estatica, ademas el codigo se hace complejo, pues no se ha encontrado una forma de
 poder trabajar con las modificaciones realizadas dento de los metodos afuera de ellos, osea es como si no ocurrieran afuera del metodo,
 esto puee transformar el codigo a largo y pesado.
+Acutalizacion
+despues de un analisis al codigo se llego a la conclusion que el codigo se simplifica si en vez de mostrar una lista de los solicitantes de aventon, 
+se muestran todos en todo momento para todos, esto no vulnera la privacidad del usuario, ya que al momento de pedir un aventon, el decide hacer public su ubicacion.
