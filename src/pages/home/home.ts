@@ -6,7 +6,10 @@ import { Geolocation } from '@ionic-native/geolocation';
 import {FirebasedatabaseLift} from '../../components/components-firebase/components-firebase'
 import * as firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
-
+import { importExpr, variable } from '@angular/compiler/src/output/output_ast';
+import {Coche} from '../../models/coche';
+import {matchPoint} from '../../models/matchpoint';
+import 'firebase/firestore';
 
 declare var google: any;
 
@@ -25,7 +28,7 @@ export class HomePage {
   //el nickname de usuario y la variable booleana que determina los botones que deben aparecer en pantalla
   nickname = "";
   disabledtrip = false;
-  tripcode = '';
+  aux = 'nel'
 
   constructor(public navCtrl: NavController,public navParams: NavParams, private geolocation: Geolocation, public alertCtrl: AlertController) {
   
@@ -94,6 +97,73 @@ export class HomePage {
   botonRide(){
     //console.log(this.marker.getCurrentPosition);
     console.log("Dispuesto a llevar a alguien");
+    const alertct = this.alertCtrl;
+    let prompt = this.alertCtrl.create({
+      title: 'Datos del carro',
+      inputs: [
+        {
+          name: 'placa',
+          placeholder: 'placa'
+        },
+        {
+          name: 'marca',
+          placeholder: 'marca'
+        },
+        {
+          name: 'color',
+          placeholder: 'color'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('Saved clicked');
+           // const coche = new Coche(data.marca, data.color, data.placa);
+           var matchpoint: matchPoint[] =[];  
+           
+           firebase.database().ref('viaje en curso').once('value', function(snapshot) {
+            var solicitudes = alertct.create();
+            let c= 0;
+            snapshot.forEach(function(ChildSnapshot){
+              var geo = new google.maps.Geocoder;
+              const latlng = {lat: ChildSnapshot.child('matchpoint').child('latitud').exportVal(), lng: ChildSnapshot.child('matchpoint').child('longitud').exportVal()}
+  
+              geo.geocode({location: latlng}, function(results, status) {
+                c= c +1;
+                
+                if(status === 'OK'){
+                  console.log(results[0].formatted_address);
+                  solicitudes.addInput({
+                    type: 'radio',
+                    label: ChildSnapshot.key + '\n ubicacion: ' + results[0].formatted_address ,
+                    
+                                       
+                  });
+                  if(c === snapshot.numChildren()){
+                    solicitudes.addButton('cancelar');
+                    solicitudes.present();
+                  }
+                }
+              });  
+              
+                return false;
+              });
+           
+            
+          });
+            
+          }
+        }
+      ]
+    });
+    prompt.present();
 
   }
   botonLift(){
@@ -105,14 +175,12 @@ export class HomePage {
       nickname: this.nickname,
       nombre: 'javi',
       telefono: '76199970',
-      conductor: '',
       matchpoint: {
         latitud: this.marker.getPosition().lat(),
         longitud: this.marker.getPosition().lng()   
       }
     });
-    console.log('tripocode: ' + this.tripcode);
-
+  
     //cambiando el marcador a fijo 
     this.marker.setDraggable(false);
   }

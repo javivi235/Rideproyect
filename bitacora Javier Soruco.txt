@@ -15,3 +15,10 @@ a los botones en el html suele presentarse el problema en el que no encuentra el
 domingo 6 de mayo
 Se corrigio la parte de inicio de sesion la cual estaba incompleta, se implementaron cuadros de alerta en el proyecto y cuadros de confirmacion donde es necesario,
 se presento un problema que luego de cerrar secion la aplicacion no reaccionaba, la razon era por que no se modificaron apropiadamente las reglas de la base de datos.
+lunes 7 de mayo
+Se implemento funcionalidad al boton de llevar a alguien, pide los datos del vehiculo para despues mostrar una lista de las solicitudes de aventon
+mostrando el nickname y la direccion de su ubicacion, los mayores de los problemas es el hecho de no poder sacar datos de metodos de firebase
+como el metodo de lectura a tiempo real o el metodo geocodificacion de firebase y goglemaps, esto genera problemas con la lista de solicitudes,
+ppor eso la lista de solicitudes no es atiempo real si no estatica, ademas el codigo se hace complejo, pues no se ha encontrado una forma de
+poder trabajar con las modificaciones realizadas dento de los metodos afuera de ellos, osea es como si no ocurrieran afuera del metodo,
+esto puee transformar el codigo a largo y pesado.

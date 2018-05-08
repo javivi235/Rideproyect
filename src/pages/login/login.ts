@@ -34,7 +34,7 @@ export class LoginPage {
    const navct = this.navCtrl;
    const alct = this.alertCtrl;
     
-
+    if(nickname !== undefined && clave !== undefined) {
     firebase.database().ref('Usuarios').child(this.username).child('email').on('value', function(snapshot) {
 
       if(snapshot.exportVal() === null) {
@@ -62,7 +62,14 @@ export class LoginPage {
         });
       }
     });
-        
+  } else{
+      let alert1 = alct.create({
+        title: 'Error',
+        subTitle: 'Rellene todos los campos',
+        buttons: ['OK']
+      });
+      alert1.present();
+  }    
       
    
     
@@ -71,9 +78,6 @@ export class LoginPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
       FirebasedatabaseLift.getInstance();
-   // firebase.auth().signInWithEmailAndPassword('asd@asd.com', 'pass123').then((res => {
-   //   console.log('saddasdq');
-   // }));
 
   }
 
