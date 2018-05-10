@@ -35,7 +35,7 @@ export class LoginPage {
    const alct = this.alertCtrl;
     
     if(nickname !== undefined && clave !== undefined) {
-    firebase.database().ref('Usuarios').child(this.username).child('email').on('value', function(snapshot) {
+    firebase.database().ref('usuarios').child(this.username).child('email').on('value', function(snapshot) {
 
       if(snapshot.exportVal() === null) {
         

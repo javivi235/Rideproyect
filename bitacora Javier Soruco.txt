@@ -25,3 +25,9 @@ esto puee transformar el codigo a largo y pesado.
 Acutalizacion
 despues de un analisis al codigo se llego a la conclusion que el codigo se simplifica si en vez de mostrar una lista de los solicitantes de aventon, 
 se muestran todos en todo momento para todos, esto no vulnera la privacidad del usuario, ya que al momento de pedir un aventon, el decide hacer public su ubicacion.
+martes 8de mayo
+ubicacion a tiempo real entre match, y servicio de direccion hacia la universidad pasando por tu matchpoint!, hubo un problema al tratar de usar atributos en lecturas de la base de datos,
+se arreglo volviendolas static, tambien hubo un problema al volver static la boleana que muestra los botones, se arreglo implementando un getter
+miercoles 9 de mayo
+se implemento un metodo para limpiar los marcadores del mapa(solicitudes de aventon), se implemento el guardado de datos y infowindow al marcador de tu match
+para poder ver datoss como su telefono o nombre o datos del vehiculo. 
